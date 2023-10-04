@@ -10,7 +10,7 @@ public class GameOfLife : MonoBehaviour
     Worker[,] workers;
     //int[,] intworkers;
     public Grid[,] intWorkers;
-    float workerSize = 0.25f;
+    float workerSize = 0.1f;
     int numberOfColums, numberOfRows;
     int spawnChancePercentage = 15;
     int firstGeneration;

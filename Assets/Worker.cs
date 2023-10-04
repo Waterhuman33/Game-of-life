@@ -28,13 +28,13 @@ public class Worker : MonoBehaviour
         }
         else if (alive && willLiveCheck)
         {
-            spriteRenderer.color = Color.yellow;
+            spriteRenderer.color = Color.green;
             
         }
         else if (!alive && willLiveCheck)
         {
           
-            spriteRenderer.color = Color.red;
+            spriteRenderer.color = Color.green;
         }
         else if (!alive && !willLiveCheck)
         {
