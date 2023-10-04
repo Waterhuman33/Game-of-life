@@ -78,8 +78,9 @@ public class GameOfLife : MonoBehaviour
                         onlythese.Remove(6);
                     }
 
+                    
                     CheckNeighbors(x, y, onlythese);
-                    //NewGeneration();
+                    
 
                 }
 
