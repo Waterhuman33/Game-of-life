@@ -22,7 +22,7 @@ public class Worker : MonoBehaviour
         if (alive && !willLiveCheck)
         {
 
-            spriteRenderer.color = Color.green;
+            spriteRenderer.color = Color.yellow;
 
 
         }
@@ -34,7 +34,7 @@ public class Worker : MonoBehaviour
         else if (!alive && willLiveCheck)
         {
           
-            spriteRenderer.color = Color.green;
+            spriteRenderer.color = Color.black;
         }
         else if (!alive && !willLiveCheck)
         {

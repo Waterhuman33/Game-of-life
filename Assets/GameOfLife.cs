@@ -42,15 +42,50 @@ public class GameOfLife : MonoBehaviour
         {
             for (int x = 0; x < numberOfColums; x++)
             {
-                if (x == 0)
+                if (x == 0 || x == numberOfColums - 1 || y == 0 || y == numberOfRows - 1)
                 {
+                    List<int> onlythese = new List<int>();
+                    onlythese.Add(0);
+                    onlythese.Add(1);
+                    onlythese.Add(2);
+                    onlythese.Add(3);
+                    onlythese.Add(5);
+                    onlythese.Add(6);
+                    onlythese.Add(7);
+                    onlythese.Add(8);
+                    if (x == 0)
+                    {
+                        onlythese.Remove(0);
+                        onlythese.Remove(1);
+                        onlythese.Remove(2);
+                    }
+                    if (x == numberOfColums - 1)
+                    {
+                        onlythese.Remove(6);
+                        onlythese.Remove(7);
+                        onlythese.Remove(8);
+                    }
+                    if (y == numberOfRows - 1)
+                    {
+                        onlythese.Remove(2);
+                        onlythese.Remove(5);
+                        onlythese.Remove(8);
+                    }
+                    if (y == 0)
+                    {
+                        onlythese.Remove(0);
+                        onlythese.Remove(3);
+                        onlythese.Remove(6);
+                    }
+
+                    CheckNeighbors(x, y, onlythese);
+                    //NewGeneration();
 
                 }
-                if (y == 0)
-                {
 
-                }
-                if ((x > 0) && (y > 0) && (y < numberOfRows - 1) && (x < numberOfColums - 1))
+
+
+                else if ((x > 0) && (y > 0) && (y < numberOfRows - 1) && (x < numberOfColums - 1))
                 {
                     CheckNeighbors(x, y);
                 }
@@ -101,14 +136,14 @@ public class GameOfLife : MonoBehaviour
             if (workers[x - 1 + i / 3, y - 1 + (i % 3)].alive == true)
             {
 
-                howManyAlive += 1;
+                howManyAlive++;
 
             }
 
         }
         if (workers[x, y].alive == false)
         {
-                workers[x, y].UpdateStatus(howManyAlive == 3);
+            workers[x, y].UpdateStatus(howManyAlive == 3);
 
 
         }
@@ -123,5 +158,37 @@ public class GameOfLife : MonoBehaviour
             //Debug.Log("its running wild kill it");
         }
     }
+    void CheckNeighbors(int x, int y, List<int> onlythese)
+    {
+        int howManyAlive = 0;
 
+        foreach (int i in onlythese)
+        {
+
+
+            if (workers[x - 1 + i / 3, y - 1 + (i % 3)].alive == true)
+            {
+
+                howManyAlive++;
+
+            }
+
+        }
+        if (workers[x, y].alive == false)
+        {
+            workers[x, y].UpdateStatus(howManyAlive == 3);
+
+
+        }
+        else if (howManyAlive == 3 || howManyAlive == 2)
+        {
+            workers[x, y].UpdateStatus(true);
+
+        }
+        else
+        {
+            workers[x, y].UpdateStatus(false);
+            Debug.Log("kill the corners?");
+        }
+    }
 }
