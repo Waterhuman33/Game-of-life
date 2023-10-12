@@ -15,7 +15,7 @@ public class Worker : MonoBehaviour
     float whatColor = 0;
     Color whenAlive;
     Color whenAlive2;
-    TimeScale timescale;
+    
 
     SpriteRenderer spriteRenderer;
  

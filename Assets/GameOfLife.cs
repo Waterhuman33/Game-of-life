@@ -13,7 +13,7 @@ public class GameOfLife : MonoBehaviour
     public Grid[,] intWorkers;
     float workerSize = 0.09f;
     int numberOfColums, numberOfRows;
-    int spawnChancePercentage = 15;
+    //int spawnChancePercentage = 15;
     public int firstGeneration;
     public int currentAlive=0;
     public int usedToBeAlive;
@@ -110,7 +110,7 @@ public class GameOfLife : MonoBehaviour
                 var newWorker = Instantiate(workerPrefab, newPos, Quaternion.identity);
                 newWorker.transform.localScale = Vector2.one * workerSize;
                 workers[x, y] = newWorker.GetComponent<Worker>();
-                if (Random.Range(0, 100) < spawnChancePercentage && (firstGeneration == 0))
+                if (Random.Range(0, 100) < StaticVariables.spawnChancePercentage && (firstGeneration == 0))
                 {
                     workers[x, y].UpdateStatus(true);
                 }
@@ -140,7 +140,7 @@ public class GameOfLife : MonoBehaviour
         {
             firstGeneration += 1;
         }
-        else;
+        else;   
             
                
         
