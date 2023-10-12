@@ -17,7 +17,11 @@ public class GameOfLife : MonoBehaviour
     public int firstGeneration;
     public int currentAlive=0;
     public int usedToBeAlive;
-    
+    public int dadUsedToBeAlive;
+        public int grandDadusedToBeAlive;
+
+
+
     int howManyAlive;
     int frames;
     void Start()
@@ -122,7 +126,10 @@ public class GameOfLife : MonoBehaviour
     }
     void NewGeneration()
     {
+        grandDadusedToBeAlive = dadUsedToBeAlive;
+        dadUsedToBeAlive = usedToBeAlive;
         usedToBeAlive = currentAlive;
+        
         currentAlive= 0;
         for (int y = 0; y < numberOfRows; y++)
         {
@@ -136,11 +143,12 @@ public class GameOfLife : MonoBehaviour
             }
             
         }
-        if (usedToBeAlive != currentAlive)
+        if (usedToBeAlive == currentAlive||dadUsedToBeAlive==currentAlive && grandDadusedToBeAlive==usedToBeAlive )
         {
-            firstGeneration += 1;
+            ; 
         }
-        else;   
+        else
+            firstGeneration += 1;  
             
                
         
