@@ -18,54 +18,7 @@ public class Worker : MonoBehaviour
     TimeScale timescale;
 
     SpriteRenderer spriteRenderer;
-  public IEnumerator DelayedUpdateStatus(bool willLiveCheck)
-    {
-        {
-            timescale ??= FindObjectOfType<TimeScale>();
-            spriteRenderer ??= GetComponent<SpriteRenderer>();
-            whatColor += 0.002f;
-            willLive = willLiveCheck;
-
-
-            Color whenAlive = Random.ColorHSV(0.16f, 0.16f, whatColor, whatColor, 1 - whatColor, 1 - whatColor);
-
-            Color whenAlive2 = Random.ColorHSV(0.78f, 0.78f, 1 - whatColor, 1 - whatColor, whatColor, whatColor);
-
-
-
-
-            //workerPosition = new Vector2(x, y);
-            if (alive && !willLiveCheck)
-            {
-
-                spriteRenderer.color = Color.Lerp(whenAlive, whenAlive2, whatColor);
-
-
-            }
-            else if (alive && willLiveCheck)
-            {
-                spriteRenderer.color = whenAlive;
-
-            }
-            else if (!alive && willLiveCheck)
-            {
-
-                spriteRenderer.color = Color.black;
-            }
-            else if (!alive && !willLiveCheck)
-            {
-
-                spriteRenderer.color = Color.black;
-            }
-
-
-        }
-        if(timescale.slider.value==0)
-        {
-          Debug.Log("pause");
-        }
-        yield return null;
-    }
+ 
     public void UpdateStatus( bool willLiveCheck)
     {
        

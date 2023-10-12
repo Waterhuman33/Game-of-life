@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class GameOfLife : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class GameOfLife : MonoBehaviour
     float workerSize = 0.09f;
     int numberOfColums, numberOfRows;
     int spawnChancePercentage = 15;
-    int firstGeneration;
+    public int firstGeneration;
+    public int currentAlive=0;
+    public int usedToBeAlive;
     
     int howManyAlive;
     int frames;
@@ -119,13 +122,28 @@ public class GameOfLife : MonoBehaviour
     }
     void NewGeneration()
     {
+        usedToBeAlive = currentAlive;
+        currentAlive= 0;
         for (int y = 0; y < numberOfRows; y++)
         {
             for (int x = 0; x < numberOfColums; x++)
             {
                 workers[x, y].alive = workers[x, y].willLive;
+                if(workers[x, y].willLive)
+                {
+                    currentAlive++;
+                }
             }
+            
         }
+        if (usedToBeAlive != currentAlive)
+        {
+            firstGeneration += 1;
+        }
+        else;
+            
+               
+        
     }
     void CheckNeighbors(int x, int y)
     {
@@ -156,7 +174,7 @@ public class GameOfLife : MonoBehaviour
         else
         {
             workers[x, y].UpdateStatus(false);
-            //Debug.Log("its running wild kill it");
+           
         }
     }
     void CheckNeighbors(int x, int y, List<int> onlythese)

@@ -10,12 +10,12 @@ public class TimeScale : MonoBehaviour
     public Slider slider;
     public float sliderValue;
     float shownsliderValue;
-    
+    public GameOfLife gameOfLife;
  
     // Update is called once per frame
-    public void Start()
+    public void Update()
     {
-       
+      
         if(slider.value<0)
         {
             shownsliderValue = 0;   
@@ -26,6 +26,6 @@ public class TimeScale : MonoBehaviour
         shownsliderValue=1+(slider.value)/10;
         
           } 
-        showTimeBox.text = "Timescale=" +shownsliderValue;
+        showTimeBox.text = "Generation:" + gameOfLife.firstGeneration;
     }
 }
