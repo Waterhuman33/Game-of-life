@@ -10,17 +10,17 @@ public class GameOfLife : MonoBehaviour
     Worker[,] workers;
     //int[,] intworkers;
     public Grid[,] intWorkers;
-    float workerSize = 0.1f;
+    float workerSize = 0.09f;
     int numberOfColums, numberOfRows;
     int spawnChancePercentage = 15;
     int firstGeneration;
-    int z;
+    
     int howManyAlive;
     int frames;
     void Start()
     {
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 4;
+        Application.targetFrameRate = 60;   
 
         numberOfColums = (int)Mathf.Floor(Camera.main.orthographicSize * Camera.main.aspect * 2 / workerSize);
         numberOfRows = (int)Mathf.Floor(Camera.main.orthographicSize * 2 / workerSize);
@@ -28,7 +28,6 @@ public class GameOfLife : MonoBehaviour
         workers = new Worker[numberOfColums, numberOfRows];
         ThisIsTheCurrentField();
         firstGeneration = 1;
-        Debug.Log("number of colums" + numberOfColums + "number of rows" + numberOfRows);
     }
 
 
@@ -38,6 +37,7 @@ public class GameOfLife : MonoBehaviour
 
     void Update()
     {
+        
         for (int y = 0; y < numberOfRows; y++)
         {
             for (int x = 0; x < numberOfColums; x++)
@@ -78,7 +78,7 @@ public class GameOfLife : MonoBehaviour
                         onlythese.Remove(6);
                     }
 
-                    
+                       
                     CheckNeighbors(x, y, onlythese);
                     
 
@@ -189,7 +189,7 @@ public class GameOfLife : MonoBehaviour
         else
         {
             workers[x, y].UpdateStatus(false);
-            Debug.Log("kill the corners?");
+            
         }
     }
 }
