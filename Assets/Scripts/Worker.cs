@@ -30,6 +30,8 @@ public class Worker : MonoBehaviour
         Color whenAlive = Random.ColorHSV(0.16f,0.16f,whatColor,whatColor,1-whatColor,1-whatColor);
         
         Color whenAlive2 = Random.ColorHSV(0.78f, 0.78f, 1-whatColor, 1-whatColor, whatColor, whatColor);
+
+        
       
         
         
@@ -44,7 +46,7 @@ public class Worker : MonoBehaviour
         }
         else if (alive && willLiveCheck)
         {
-            spriteRenderer.color = whenAlive ;
+            spriteRenderer.color = Color.Lerp(whenAlive2, whenAlive, 1);
             
         }
         else if (!alive && willLiveCheck)

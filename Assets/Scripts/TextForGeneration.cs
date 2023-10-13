@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 
 public class TextForGeneration : MonoBehaviour
 {
-    public TextMeshProUGUI showTimeBox;
+   
+    public TextMeshProUGUI showGenerationBox;
     public GameOfLife gameOfLife;
     // Start is called before the first frame update
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        showTimeBox.text ="Generation:" + gameOfLife.firstGeneration;
+        showGenerationBox.text ="Generation:" + gameOfLife.firstGeneration;
+        
     }
 }

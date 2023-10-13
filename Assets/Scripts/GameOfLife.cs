@@ -15,19 +15,19 @@ public class GameOfLife : MonoBehaviour
     int numberOfColums, numberOfRows;
     //int spawnChancePercentage = 15;
     public int firstGeneration;
-    public int currentAlive=0;
+    public int currentAlive = 0;
     public int usedToBeAlive;
     public int dadUsedToBeAlive;
-        public int grandDadusedToBeAlive;
+    public int grandDadusedToBeAlive;
 
 
-
+    float timer;
     int howManyAlive;
     int frames;
     void Start()
     {
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;   
+        
 
         numberOfColums = (int)Mathf.Floor(Camera.main.orthographicSize * Camera.main.aspect * 2 / workerSize);
         numberOfRows = (int)Mathf.Floor(Camera.main.orthographicSize * 2 / workerSize);
@@ -44,22 +44,27 @@ public class GameOfLife : MonoBehaviour
 
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        if(timer>0.5)
+        { 
+            timer = 0;
         for (int y = 0; y < numberOfRows; y++)
         {
             for (int x = 0; x < numberOfColums; x++)
             {
                 if (x == 0 || x == numberOfColums - 1 || y == 0 || y == numberOfRows - 1)
                 {
-                    List<int> onlythese = new List<int>();
-                    onlythese.Add(0);
-                    onlythese.Add(1);
-                    onlythese.Add(2);
-                    onlythese.Add(3);
-                    onlythese.Add(5);
-                    onlythese.Add(6);
-                    onlythese.Add(7);
-                    onlythese.Add(8);
+                    List<int> onlythese = new List<int>
+                    {
+                        0,
+                        1,
+                        2,
+                        3,
+                        5,
+                        6,
+                        7,
+                        8
+                    };
                     if (x == 0)
                     {
                         onlythese.Remove(0);
@@ -85,9 +90,9 @@ public class GameOfLife : MonoBehaviour
                         onlythese.Remove(6);
                     }
 
-                       
+
                     CheckNeighbors(x, y, onlythese);
-                    
+
 
                 }
 
@@ -102,7 +107,7 @@ public class GameOfLife : MonoBehaviour
 
         NewGeneration();
     }
-
+    }
     private void ThisIsTheCurrentField()
     {
         for (int y = 0; y < numberOfRows; y++)
@@ -129,29 +134,29 @@ public class GameOfLife : MonoBehaviour
         grandDadusedToBeAlive = dadUsedToBeAlive;
         dadUsedToBeAlive = usedToBeAlive;
         usedToBeAlive = currentAlive;
-        
-        currentAlive= 0;
+
+        currentAlive = 0;
         for (int y = 0; y < numberOfRows; y++)
         {
             for (int x = 0; x < numberOfColums; x++)
             {
                 workers[x, y].alive = workers[x, y].willLive;
-                if(workers[x, y].willLive)
+                if (workers[x, y].willLive)
                 {
                     currentAlive++;
                 }
             }
-            
+
+
         }
-        if (usedToBeAlive == currentAlive||dadUsedToBeAlive==currentAlive && grandDadusedToBeAlive==usedToBeAlive )
+        if (usedToBeAlive == currentAlive || dadUsedToBeAlive == currentAlive && grandDadusedToBeAlive == usedToBeAlive || currentAlive == grandDadusedToBeAlive)
         {
-            ; 
+            ;
         }
         else
-            firstGeneration += 1;  
-            
-               
-        
+            firstGeneration += 1;
+
+
     }
     void CheckNeighbors(int x, int y)
     {
@@ -182,7 +187,7 @@ public class GameOfLife : MonoBehaviour
         else
         {
             workers[x, y].UpdateStatus(false);
-           
+
         }
     }
     void CheckNeighbors(int x, int y, List<int> onlythese)
@@ -215,7 +220,7 @@ public class GameOfLife : MonoBehaviour
         else
         {
             workers[x, y].UpdateStatus(false);
-            
+
         }
     }
 }
